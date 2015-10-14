@@ -20,7 +20,10 @@ load 'rails/tasks/engine.rake'
 
 load 'rails/tasks/statistics.rake'
 
+# rspec
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new('spec')
 
-
-Bundler::GemHelper.install_tasks
-
+# rake tasks
+task default: :spec
+task test: :spec
