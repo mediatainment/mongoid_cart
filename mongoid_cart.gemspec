@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = MongoidCart::VERSION
   s.authors     = ["Jan Jezek"]
   s.email       = ["mail@mediatainment-productions.com"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of MongoidCart."
-  s.description = "TODO: Description of MongoidCart."
+  s.homepage    = "https://www.github.com/mediatainment/mongoid_cart"
+  s.summary     = "Very basic cart system for mongoid models."
+  s.description = "If you need a simple shopping cart handler for monogid project use this one :-)"
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
