@@ -19,4 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 3.2"
 
   s.add_development_dependency "mongoid"
+
+  s.add_development_dependency "rspec-rails"
+
 end
