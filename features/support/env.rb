@@ -60,3 +60,8 @@ end
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+# include Engine routes in Cucumber world
+module EngineRoutesHelper
+  include MongoidCart::Engine.routes.url_helpers
+end
+World(EngineRoutesHelper)
