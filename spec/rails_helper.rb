@@ -33,6 +33,7 @@ RSpec.configure do |config|
 
   config.mock_with :rspec
 
+  config.include MongoidCart::Engine.routes.url_helpers
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.
