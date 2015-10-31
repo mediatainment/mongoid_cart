@@ -79,6 +79,10 @@ GEM
       moped (~> 1.4)
       origin (~> 1.0)
       tzinfo (~> 0.3.29)
+    mongoid-rspec (1.13.0)
+      mongoid (~> 3.1)
+      rake
+      rspec (~> 3.1)
     moped (1.5.3)
     multi_json (1.11.2)
     multi_test (0.1.2)
@@ -111,6 +115,10 @@ GEM
     rake (10.4.2)
     rdoc (3.12.2)
       json (~> 1.4)
+    rspec (3.3.0)
+      rspec-core (~> 3.3.0)
+      rspec-expectations (~> 3.3.0)
+      rspec-mocks (~> 3.3.0)
     rspec-core (3.3.2)
       rspec-support (~> 3.3.0)
     rspec-expectations (3.3.1)
@@ -151,6 +159,7 @@ DEPENDENCIES
   database_cleaner (~> 1.3.0)
   factory_girl_rails
   mongoid
+  mongoid-rspec
   mongoid_cart!
   rspec-rails
 
