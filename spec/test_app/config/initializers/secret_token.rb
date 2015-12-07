@@ -1,0 +1,3 @@
+TestApp::Application.configure do
+  config.secret_token ="3518b5e37e097719c92ca3b48a3704969fb9783c875ba0bc03b8986da1862ece4d63b9e9dfec81fc4dff5c7df3b125218c7b435fcf4f46b4d9b722e1569b66fa"
+end
