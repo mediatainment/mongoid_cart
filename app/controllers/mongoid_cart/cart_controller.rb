@@ -4,7 +4,6 @@ class MongoidCart::CartController < ActionController::Base
 
   def show
     @cart = current_cart
-
   end
 
   def add_item
