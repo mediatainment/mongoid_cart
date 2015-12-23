@@ -27,5 +27,9 @@ module MongoidCart
        id: item._id,
        units: 1}
     end
+
+    def get_product(item)
+      item[:type].constantize.find(item[:id])
+    end
   end
 end
