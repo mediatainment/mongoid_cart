@@ -1,11 +1,12 @@
 class Product
   include Mongoid::Document
+  include MongoidCart::ActsAsProduct
 
   field :name, type: String
   field :sku, type: String
-  field :stock, type: Float
+  field :in_stock, type: Float
   field :net_price, type: Float
+  field :units, type: Array
 
-  validates_presence_of :name, :net_price
 end
 
