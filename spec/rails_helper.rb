@@ -32,7 +32,6 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = false
 
   config.mock_with :rspec
   config.include FactoryGirl::Syntax::Methods
@@ -53,7 +52,19 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
-  config.before :each do
-    Mongoid.purge!
+  # Clean/Reset Mongoid DB prior to running the tests
+
+  config.before(:suite) do
+    DatabaseCleaner[:mongoid].strategy = :truncation
   end
+
+  config.before(:each) do
+    Mongoid::Config.purge!
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+
 end
