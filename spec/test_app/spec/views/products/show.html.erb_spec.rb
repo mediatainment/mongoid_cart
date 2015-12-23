@@ -5,7 +5,7 @@ RSpec.describe "products/show", :type => :view do
     @product = assign(:product, Product.create!(
       :name => "Name",
       :sku => "Sku",
-      :stock => 1.5,
+      :in_stock => 1.5,
       :net_price => 1.5
     ))
   end

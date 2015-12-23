@@ -11,19 +11,16 @@
   </tr>
   </thead>
   <% @cart.each do |cart_item| %>
-
       <tbody>
       <tr>
         <td><%= cart_item[:units] %></td>
         <td><%= get_product(cart_item).title %></td>
         <td><%= get_product(cart_item).class %></td>
-        <td>          <%= form_tag(mongoid_cart.remove_item_path(item: {type: cart_item[:type], id: cart_item[:id]}), class: 'cart nobottommargin clearfix') do %>
-
+        <td><%= form_tag(mongoid_cart.remove_item_path(item: {type: cart_item[:type], id: cart_item[:id]}), class: 'cart nobottommargin clearfix') do %>
               <%# render partial: "partials/shop/quantity" %>
               <%= submit_tag 'Remove from cart', class: 'btn btn-default' %>
-
-              <!-- Product Single - Quantity & Cart Button End -->
-          <% end %></td>
+          <% end %>
+        </td>
       </tr>
   <% end %>
 
