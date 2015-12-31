@@ -17,8 +17,5 @@ module MongoidCart
       self.in_stock > 0
     end
 
-    def amount
-    end
-
   end
 end

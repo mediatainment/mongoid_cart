@@ -4,21 +4,23 @@
 <table class="table table-hover">
   <thead>
   <tr>
+    <th>Amount</th>
     <th>Units</th>
     <th>Name</th>
     <th>Type</th>
     <th>Remove</th>
   </tr>
   </thead>
-  <% @cart.each do |cart_item| %>
+  <% current_cart.each do |cart_item| %>
       <tbody>
       <tr>
+        <td><%= cart_item[:amount] %></td>
         <td><%= cart_item[:units] %></td>
-        <td><%= get_product(cart_item).title %></td>
-        <td><%= get_product(cart_item).class %></td>
+        <td><%= cart_item.title %></td>
+        <td><%= cart_item.class %></td>
         <td><%= form_tag(mongoid_cart.remove_item_path(item: {type: cart_item[:type], id: cart_item[:id]}), class: 'cart nobottommargin clearfix') do %>
               <%# render partial: "partials/shop/quantity" %>
-              <%= submit_tag 'Remove from cart', class: 'btn btn-default' %>
+              <%= submit_tag 'Remove from cart', class: 'btn btn-xs btn-error' %>
           <% end %>
         </td>
       </tr>

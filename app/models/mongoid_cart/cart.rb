@@ -12,13 +12,25 @@ module MongoidCart
     end
 
     def self.add_item(item)
-      added = added?(item)
       #counts up if already there
+      added = added?(item)
       unless added
-        item_to_count_up = MongoidCart::Cart.items.detect { |c_item| c_item[:id] == item._id }
+        item_from_cart = MongoidCart::Cart.items.detect { |c_item| c_item[:id] == item._id }
+        count_up_in_cart(item_from_cart)
+      end
+      # return the item
+      added
+    end
+
+
+    # when product is marked as single_product only one item can be in the cart
+    def self.count_up_in_cart(item_to_count_up)
+      # check if item can be added twice
+      if defined?(self.single_product) && self.single_product == true
+        item_to_count_up[:amount] = 1
+      else
         item_to_count_up[:amount] = (item_to_count_up[:amount] + 1) rescue 1
       end
-      added
     end
 
     def self.added?(item)
@@ -35,10 +47,5 @@ module MongoidCart
     def self.in_cart?(item)
       MongoidCart::Cart.current.include? item
     end
-
-    def get_product(item)
-      item[:type].constantize.find(item[:id])
-    end
-
   end
 end

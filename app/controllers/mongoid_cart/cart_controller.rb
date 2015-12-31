@@ -1,16 +1,21 @@
 class MongoidCart::CartController < ActionController::Base
 
-  include MongoidCart::CartHelper
+  include MongoidCart::ViewHelpers
 
   def show
     @cart = current_cart
   end
 
   def add_item
-    class_name = params[:item][:type]
-    item = class_name.constantize.find(params[:item][:id])
-    add_to_cart(item)
-    redirect_to :back
+    class_name = params[:type]
+    item = class_name.constantize.find(params[:id])
+    if item.add_to_cart
+      message = ""
+    else
+      message = ""
+    end
+
+    redirect_to :back, notice: message
   end
 
   def remove_item
