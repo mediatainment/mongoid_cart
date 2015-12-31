@@ -14,10 +14,6 @@ describe MongoidCart::ActsAsProduct do
       @product = create :product
     end
 
-    after :each do
-      Mongoid::Config.purge!
-      Product.destroy_all
-    end
     it "should add an item" do
 
       @product.add_to_cart
