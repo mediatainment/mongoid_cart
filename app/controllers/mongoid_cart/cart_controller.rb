@@ -21,7 +21,7 @@ class MongoidCart::CartController < ActionController::Base
   def remove_item
     class_name = params[:item][:type]
     item = class_name.constantize.find(params[:item][:id])
-    remove_from_cart(item)
+    item.remove_from_cart
     redirect_to :back
   end
 end

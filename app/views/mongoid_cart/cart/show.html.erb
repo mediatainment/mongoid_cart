@@ -18,7 +18,7 @@
         <td><%= cart_item[:units] %></td>
         <td><%= cart_item.title %></td>
         <td><%= cart_item.class %></td>
-        <td><%= form_tag(mongoid_cart.remove_item_path(item: {type: cart_item[:type], id: cart_item[:id]}), class: 'cart nobottommargin clearfix') do %>
+        <td><%= form_tag(mongoid_cart.remove_item_path(item: {type: cart_item.class.to_s, id: cart_item[:id]}), class: 'cart nobottommargin clearfix') do %>
               <%# render partial: "partials/shop/quantity" %>
               <%= submit_tag 'Remove from cart', class: 'btn btn-xs btn-error' %>
           <% end %>
