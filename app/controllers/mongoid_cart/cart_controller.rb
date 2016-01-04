@@ -7,12 +7,12 @@ class MongoidCart::CartController < ActionController::Base
   end
 
   def add_item
-    class_name = params[:type]
-    item = class_name.constantize.find(params[:id])
-    if item.add_to_cart
-      message = ""
+    class_name = params[:item][:type]
+    item = class_name.constantize.find(params[:item][:id])
+    unless item.add_to_cart.nil?
+      message = "Added to cart"
     else
-      message = ""
+      message = "Already in cart"
     end
 
     redirect_to :back, notice: message
