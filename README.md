@@ -33,10 +33,11 @@ Let's add the cart functions to your models (can be more than once).
     
     # Your model MUST HAVE the following fields:
     
-    field :title, type: String
-    field :sku, type: String
-    field :price, type: Float
-    field :units, type: Array
+    field :title, type: String # Title/Name of the product
+    field :sku, type: String # unique Product ID
+    field :net_price, type: Float # simple net price for item 
+    field :units, type: Array # should provide an array with values for units 
+    field :amount, type: Integer # amount of units in cart
     
 Now your model has a few new methods like
 
