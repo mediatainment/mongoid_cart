@@ -66,9 +66,9 @@ To show your cart, simply make a partial which iterates through the ``current_ca
 
     Example:
     
-    current_cart.each do |item|
-       "#{item.title}: #{item.price}"
-    end
+    <% current_cart.each do |item| %>   
+        <%= link_to(item.title, item) %> 
+    <% end %>
     
 ## Price calculation
 
