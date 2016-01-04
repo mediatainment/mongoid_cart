@@ -31,18 +31,44 @@ Let's add the cart functions to your models (can be more than once).
 
     include MongoidCart::ActsAsProduct
     
+    # Your model MUST HAVE the following fields:
+    
+    field :title, type: String
+    field :sku, type: String
+    field :price, type: Float
+    field :units, type: Array
+    
 Now your model has a few new methods like
 
-* add_to_cart 
-* remove_from_cart
-* in_cart?
-* in_stock?
+- add_to_cart 
+- remove_from_cart
+- in_cart?
+- in_stock?
 
-If you wann add an item to the cart, simply put this into your view
+If you wanna add or remove an item to the cart, simply put this into your view
 
-    <%= form_tag(mongoid_cart.remove_item_path(item: {type: cart_item.class.to_s, id: cart_item[:id]}), class: 'cart nobottommargin clearfix') do %>
-       <%# render partial: "partials/shop/quantity" %>
-       <%= submit_tag 'Remove from cart', class: 'btn btn-xs btn-error' %>
-    <% end %>
+    <%= add_remove_cart_link(your_model_instance) %>
+
+    # or 
     
+    <%= add_to_cart_link(your_model_instance) unless your_model_instance.in_cart? %>
+    <%= remove_from_cart_link(your_model_instance) if your_model_instance.in_cart? %>
     
+Your cart can be retrieved via ``current_cart``
+
+Which retrieves an ``Set`` class (which is a unique Array)
+
+    #<Set: {#<YourModel _id: 123456789012334556000000, created_at: 2015-12-31 00:23:17 UTC, updated_at: 2015-12-31 00:23:17 UTC, title: "Title 1", user_id: BSON::ObjectId('123123123123123123000001') >,
+            #<YourModel _id: 123456789012334556000001, created_at: 2015-12-24 13:21:54 UTC, updated_at: 2015-12-24 13:44:47 UTC, title: "Title 2", user_id: BSON::ObjectId('123123123123123123000001')>
+           }>
+
+To show your cart, simply make a partial which iterates through the ``current_cart` items
+
+    Example:
+    
+    current_cart.each do |item|
+       "#{item.title}: #{item.price}"
+    end
+    
+## Price calculation
+

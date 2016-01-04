@@ -3,9 +3,10 @@
 #
 # Your model MUST HAVE the following fields:
 
+#   field :title, type: String
+#   field :sku, type: String
 #   field :price, type: Float
-#   field :unit, type: Float
-#   field :price, type: Float
+#   field :units, type: Array
 
 
 module MongoidCart
