@@ -1,3 +1,13 @@
+# This module can be included into your models
+# include MongoidCart::ActsAsProduct
+#
+# Your model MUST HAVE the following fields:
+
+#   field :price, type: Float
+#   field :unit, type: Float
+#   field :price, type: Float
+
+
 module MongoidCart
   module ActsAsProduct
 
