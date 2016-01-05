@@ -48,7 +48,7 @@ Now your model has a few new methods like
 
 If you wanna add or remove an item to the cart, simply put this into your view
 
-    <%= add_remove_cart_link(your_model_instance) %>
+    <%= add_or_remove_cart_link(your_model_instance) %>
 
     # or 
     
