@@ -2,10 +2,11 @@
 FactoryGirl.define do
 
   factory :product do
-    sequence(:name) { |n| "Product Name#{n}" }
+    sequence(:title) { |n| "Product Name#{n}" }
     sequence(:sku) { |n| "PRODUCT-0#{n}" }
+    net_price 99
+    amount 10
     in_stock 100
-    net_price '10'
-    units [1, 10, 100, 10000]
+    unit %w{kg lt m pkg oz ml}.sample
   end
 end
