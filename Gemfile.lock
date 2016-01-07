@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mongoid_cart (0.0.1)
+    mongoid_cart (0.0.2)
       mongoid
       rails (~> 4.0.0)
 
@@ -146,7 +146,7 @@ DEPENDENCIES
   database_cleaner
   factory_girl_rails
   mongoid
-  mongoid-rspec
+  mongoid-rspec (= 3.0.0)
   mongoid_cart!
   rspec-rails
 
