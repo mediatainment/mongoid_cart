@@ -1,31 +1,36 @@
-# This module can be included into your models
-# include MongoidCart::ActsAsProduct
+# This module should be included into your models via
+# include into MongoidCart::ActsAsProduct
 #
-# Your model MUST HAVE the following fields:
-
-#   field :title, type: String
-#   field :sku, type: String
-#   field :price, type: Float
-#   field :units, type: Array
-
+require 'active_support/concern'
 
 module MongoidCart
   module ActsAsProduct
+    extend ActiveSupport::Concern
 
-    def add_to_cart
-      MongoidCart::Cart.add_item(self)
+    included do
+
+      has_and_belongs_to_many :cart_items, :class_name => 'MongoidCart::CartItem'
+
+      validates_presence_of :sku, :title, :net_price, :unit, :amount, :type, :unit, :in_stock
+
+      # returns Hash with mapped cart_item params
+      def cart_item_params
+        {title: self.title,
+         unit: self.unit,
+         amount: self.amount,
+         type: self.class.to_s,
+         net_price: self.net_price
+        }
+      end
+
+      def type
+        self.class.to_s
+      end
+
     end
 
-    def remove_from_cart
-      MongoidCart::Cart.remove_item(self)
-    end
+    module ClassMethods
 
-    def in_cart?
-      MongoidCart::Cart.in_cart?(self)
-    end
-
-    def in_stock?
-      self.in_stock > 0
     end
 
   end

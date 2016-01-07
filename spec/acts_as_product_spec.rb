@@ -1,70 +1,56 @@
 require 'rails_helper'
 
-describe MongoidCart::ActsAsProduct do
+describe MongoidCart::ActsAsProduct, type: :model do
 
-  describe "model validations" do
+  before :each do
+    @product = create :product
+  end
 
-    it 'has to include a :name attribute' do
-      expect(true).to be_truthy
+  describe 'validations' do
+
+    it 'validate presence of sku' do
+      expect(@product).to validate_presence_of(:sku)
+    end
+    it 'validate presence of title' do
+      expect(@product).to validate_presence_of(:title)
+    end
+    it 'validate presence of net_price' do
+      expect(@product).to validate_presence_of(:net_price)
+    end
+    it 'validate presence of amount' do
+      expect(@product).to validate_presence_of(:amount)
+    end
+    it 'validate presence of type' do
+      expect(@product).to validate_presence_of(:type)
+    end
+    it 'validate presence of unit' do
+      expect(@product).to validate_presence_of(:unit)
+    end
+    it 'validate presence of in_stock' do
+      expect(@product).to validate_presence_of(:in_stock)
     end
   end
 
-  describe 'add_to_cart' do
-    before :each do
-      @product = create :product
-    end
+  describe 'fields' do
 
-    it "should add an item" do
+    describe 'type' do
 
-      @product.add_to_cart
-
-      expect(MongoidCart::Cart.current.count).to be 1
-    end
-
-    it "should not add duplicate items" do
-
-      @product.add_to_cart
-      @product.add_to_cart
-
-      expect(MongoidCart::Cart.current.count).to be 1
-    end
-
-    it "should add different items" do
-      product2 = create :product
-
-      @product.add_to_cart
-      product2.add_to_cart
-
-      expect(MongoidCart::Cart.current.count).to be 2
+      it 'should return the class as string' do
+        expect(@product.type).to eq Product.to_s
+      end
     end
   end
 
-  describe 'remove_from_cart' do
+  describe 'cart_item_params' do
 
-    it "removes item from cart" do
-      product = create(:product)
+    it 'should return Hash with mapped params' do
+      result = {title: @product.title,
+                unit: @product.unit,
+                amount: @product.amount,
+                type: @product.class.to_s,
+                net_price: @product.net_price}
 
-      product.add_to_cart
-      product.remove_from_cart
-
-      expect(MongoidCart::Cart.current.count).to be 0
-    end
-  end
-
-  describe 'in_cart?' do
-
-    it 'returns false if not in cart' do
-      product = create :product
-
-      expect(product.in_cart?).to be_falsey
-    end
-
-    it 'returns true if already in cart' do
-      product = create :product
-
-      product.add_to_cart
-
-      expect(product.in_cart?).to be_truthy
+      expect(@product.cart_item_params).to eq result
     end
   end
 end
