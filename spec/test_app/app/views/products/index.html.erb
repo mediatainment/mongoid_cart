@@ -2,9 +2,11 @@
 
 <table>
   <tr>
-    <th>Name</th>
+    <th>Title</th>
     <th>Sku</th>
     <th>Stock</th>
+    <th>Amount</th>
+    <th>Unit</th>
     <th>Net price</th>
     <th></th>
     <th></th>
@@ -13,9 +15,11 @@
 
 <% @products.each do |product| %>
   <tr>
-    <td><%= product.name %></td>
+    <td><%= product.product_title %></td>
     <td><%= product.sku %></td>
     <td><%= product.in_stock %></td>
+    <td><%= product.amount %></td>
+    <td><%= product.unit %></td>
     <td><%= product.net_price %></td>
     <td><%= link_to 'Show', product %></td>
     <td><%= link_to 'Edit', edit_product_path(product) %></td>

@@ -3,8 +3,9 @@ require 'rails_helper'
 RSpec.describe "products/edit", :type => :view do
   before(:each) do
     @product = assign(:product, Product.create!(
-      :name => "MyString",
-      :sku => "MyString",
+      :product_title => "Title",
+      :unit => "kg",
+      :amount => 5,
       :in_stock => 1.5,
       :net_price => 1.5
     ))
@@ -15,9 +16,7 @@ RSpec.describe "products/edit", :type => :view do
 
     assert_select "form[action=?][method=?]", product_path(@product), "post" do
 
-      assert_select "input#product_name[name=?]", "product[name]"
-
-      assert_select "input#product_sku[name=?]", "product[sku]"
+      assert_select "input#product_product_title[name=?]", "product[product_title]"
 
       assert_select "input#product_in_stock[name=?]", "product[in_stock]"
 

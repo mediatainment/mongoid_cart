@@ -40,7 +40,7 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    @product = Product.new(params[:product])
+    @product = Product.new(product_params)
 
     respond_to do |format|
       if @product.save
@@ -59,11 +59,11 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
 
     respond_to do |format|
-      if @product.update_attributes(params[:product])
+      if @product.update(product_params)
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: 'edit' }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
@@ -79,5 +79,11 @@ class ProductsController < ApplicationController
       format.html { redirect_to products_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def product_params
+    params.require(:product).permit(:product_title, :in_stock, :amount, :net_price, :units, :unit, :sku)
   end
 end
