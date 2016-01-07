@@ -1,13 +1,11 @@
 class MongoidCart::CartController < ActionController::Base
 
-  include MongoidCart::ViewHelpers
-
   def show
-    @cart = current_cart
+    @cart = Cart.find cart_id
   end
 
   def add_item
-    class_name = params[:item][:type]
+    class_name = item_params[:type]
     item = class_name.constantize.find(params[:item][:id])
     unless item.add_to_cart.nil?
       message = "Added to cart"
@@ -19,9 +17,15 @@ class MongoidCart::CartController < ActionController::Base
   end
 
   def remove_item
-    class_name = params[:item][:type]
+    class_name = item_params[:type]
     item = class_name.constantize.find(params[:item][:id])
-    item.remove_from_cart
+    current_cart.remove(item)
     redirect_to :back
+  end
+
+  private
+
+  def item_params
+    params.require(:item)
   end
 end

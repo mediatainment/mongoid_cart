@@ -8,23 +8,11 @@ describe MongoidCart::ActsAsProduct, type: :model do
 
   describe 'validations' do
 
-    it 'validate presence of sku' do
-      expect(@product).to validate_presence_of(:sku)
-    end
-    it 'validate presence of title' do
-      expect(@product).to validate_presence_of(:title)
+    it 'validate presence of product_title' do
+      expect(@product).to validate_presence_of(:product_title)
     end
     it 'validate presence of net_price' do
       expect(@product).to validate_presence_of(:net_price)
-    end
-    it 'validate presence of amount' do
-      expect(@product).to validate_presence_of(:amount)
-    end
-    it 'validate presence of type' do
-      expect(@product).to validate_presence_of(:type)
-    end
-    it 'validate presence of unit' do
-      expect(@product).to validate_presence_of(:unit)
     end
     it 'validate presence of in_stock' do
       expect(@product).to validate_presence_of(:in_stock)
@@ -44,7 +32,7 @@ describe MongoidCart::ActsAsProduct, type: :model do
   describe 'cart_item_params' do
 
     it 'should return Hash with mapped params' do
-      result = {title: @product.title,
+      result = {product_title: @product.product_title,
                 unit: @product.unit,
                 amount: @product.amount,
                 type: @product.class.to_s,

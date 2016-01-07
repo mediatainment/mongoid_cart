@@ -11,14 +11,16 @@ module MongoidCart
 
       has_and_belongs_to_many :cart_items, :class_name => 'MongoidCart::CartItem'
 
-      validates_presence_of :sku, :title, :net_price, :unit, :amount, :type, :unit, :in_stock
+      attr_accessor :amount, :unit
+
+      validates_presence_of :product_title, :net_price, :in_stock
 
       # returns Hash with mapped cart_item params
       def cart_item_params
-        {title: self.title,
+        {product_title: self.product_title,
          unit: self.unit,
          amount: self.amount,
-         type: self.class.to_s,
+         type: self.type,
          net_price: self.net_price
         }
       end
