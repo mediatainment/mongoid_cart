@@ -14,7 +14,9 @@ class Product
   # this field simple provides an Array with units in Strings
   field :units, type: Array
 
-  attr_accessor :product_title, :net_price, :in_stock, :unit, :sku
+  attr_accessor :product_title, :net_price, :in_stock, :unit, :sku, :cart_item
+
+  has_many :cart_items, class_name: "MongoidCart::CartItem", inverse_of: :product
 
   # a method which provides a product sku like
   # PN-aec5d-00002
