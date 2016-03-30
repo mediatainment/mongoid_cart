@@ -33,10 +33,14 @@ describe MongoidCart::ActsAsProduct, type: :model do
 
     it 'should return Hash with mapped params' do
       result = {product_title: @product.product_title,
-                unit: @product.unit,
-                amount: @product.amount,
                 type: @product.class.to_s,
-                net_price: @product.net_price}
+                net_price: @product.net_price,
+                units: @product.units,
+                in_stock: @product.in_stock,
+                unit: @product.unit,
+                amount: @product.amount
+
+      }
 
       expect(@product.cart_item_params).to eq result
     end

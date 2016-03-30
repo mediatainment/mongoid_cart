@@ -9,7 +9,7 @@ module MongoidCart
     field :net_price, type: Float
     field :unit, type: String
 
-    belongs_to :cart, :inverse_of => :cart_items, :class_name => 'MongoidCart::Cart'
+    belongs_to :mongoid_cart_cart, :class_name => 'MongoidCart::Cart'
 
     validates_presence_of :product_title, :unit, :amount, :type, :net_price
 
