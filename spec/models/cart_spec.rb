@@ -3,9 +3,10 @@ require 'rails_helper'
 describe MongoidCart::Cart do
 
   describe 'add' do
+
     before(:each) do
       @product = create :product
-      @cart = MongoidCart::Cart.new
+      @user = create :user
     end
 
     it "should add new cart_items" do

@@ -11,7 +11,7 @@ module MongoidCart
 
     belongs_to :mongoid_cart_cart, :class_name => 'MongoidCart::Cart'
 
-    validates_presence_of :product_title, :unit, :amount, :type, :net_price
+    validates_presence_of :type, :product_title, :sku, :amount, :unit, :net_price
 
   end
 end

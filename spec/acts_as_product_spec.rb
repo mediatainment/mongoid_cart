@@ -23,6 +23,7 @@ describe MongoidCart::ActsAsProduct, type: :model do
     it 'validate presence of units' do
       expect(@product).to validate_presence_of(:units)
     end
+
   end
 
   describe 'fields' do
@@ -50,5 +51,6 @@ describe MongoidCart::ActsAsProduct, type: :model do
 
       expect(@product.cart_item_params).to eq result
     end
+
   end
 end

@@ -4,7 +4,6 @@ describe MongoidCart::CartItem do
 
   describe 'add' do
     before(:each) do
-      # @product = create :cart_item
       @cart = MongoidCart::CartItem.new
     end
 

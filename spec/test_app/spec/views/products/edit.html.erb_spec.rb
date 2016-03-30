@@ -5,6 +5,7 @@ RSpec.describe "products/edit", :type => :view do
     @product = assign(:product, Product.create!(
       :product_title => "Title",
       :unit => "kg",
+      :units => ["a", "b", "c"],
       :amount => 5,
       :in_stock => 1.5,
       :net_price => 1.5

@@ -9,6 +9,7 @@ module MongoidCart
 
     included do
 
+      # adds dynamic association to the CartItem to refer to the ActsAsProduct class
       MongoidCart::CartItem.class_eval(
           "belongs_to :product, :class_name => 'Product', inverse_of: :cart_item"
       )
@@ -20,9 +21,6 @@ module MongoidCart
                inverse_of: :product
 
       has_many :mongoid_cart_cart_items, :class_name => 'MongoidCart::CartItem'
-
-      validates_presence_of :product_title, :net_price, :in_stock
-
 
       # sku
       field :sku, type: String
@@ -40,6 +38,8 @@ module MongoidCart
 
       attr_accessor :unit, :amount
 
+      validates_presence_of :product_title, :net_price, :in_stock, :units
+
       before_create :assign_sku
 
       # a method which provides a product sku like
@@ -48,7 +48,6 @@ module MongoidCart
       def build_sku
         "#{self.product_title.split(' ').map(&:first).map!(&:upcase).join}-#{_id.to_s.split(//).first(5).join}-#{_id.to_s.split(//).last(5).join}"
       end
-
 
       # returns Hash with mapped cart_item params
       def cart_item_params
@@ -60,10 +59,6 @@ module MongoidCart
          unit: self.unit,
          amount: self.amount
         }
-      end
-
-      def add_to_cart
-        self
       end
 
       # returns class of product as String
