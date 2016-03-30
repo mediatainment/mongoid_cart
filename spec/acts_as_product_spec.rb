@@ -11,11 +11,17 @@ describe MongoidCart::ActsAsProduct, type: :model do
     it 'validate presence of product_title' do
       expect(@product).to validate_presence_of(:product_title)
     end
+
     it 'validate presence of net_price' do
       expect(@product).to validate_presence_of(:net_price)
     end
+
     it 'validate presence of in_stock' do
       expect(@product).to validate_presence_of(:in_stock)
+    end
+
+    it 'validate presence of units' do
+      expect(@product).to validate_presence_of(:units)
     end
   end
 

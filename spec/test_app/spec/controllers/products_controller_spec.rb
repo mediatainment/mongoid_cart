@@ -84,16 +84,19 @@ RSpec.describe ProductsController, :type => :controller do
 
   describe "PUT #update" do
     render_views
+
     context "with valid params" do
+
       let(:new_attributes) {
         {product_title: "Blah", sku: "123-ABC", net_price: 123.55}
       }
 
       it "updates the requested product" do
         product = Product.create! valid_attributes
-        put :update, {:id => product.to_param, :product => new_attributes}, valid_session
+        put :update,:id => product.to_param, :product => new_attributes
         product.reload
-        skip("Add assertions for updated state")
+
+        expect(product.product_title).to eql(new_attributes[:product_title])
       end
 
       it "assigns the requested product as @product" do

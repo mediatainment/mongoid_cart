@@ -5,9 +5,9 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
+#require "mongoid_cart"
 
 Bundler.require(*Rails.groups)
-require "mongoid_cart"
 
 module TestApp
   class Application < Rails::Application
