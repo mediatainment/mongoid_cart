@@ -13,5 +13,4 @@ describe MongoidCart::Cart do
 
     end
   end
-
 end

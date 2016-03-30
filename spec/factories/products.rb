@@ -1,4 +1,3 @@
-# This will guess the User class
 FactoryGirl.define do
 
   valid_units = %w{kg lt m pkg oz ml}
