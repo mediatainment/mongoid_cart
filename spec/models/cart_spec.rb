@@ -5,12 +5,12 @@ describe MongoidCart::Cart do
   describe 'add' do
 
     before(:each) do
-      @product = create :product
-      @user = create :user
+      @product = create(:product)
+      @user = create(:user)
     end
 
-    it "should add new cart_items" do
-
+    it "has relation to user" do
+      is_expected.to belong_to(:user).of_type(User).as_inverse_of(:carts)
     end
   end
 end
