@@ -33,6 +33,7 @@ module MongoidCart
       # how many products are in stock
       field :in_stock, type: Float, default: 0
 
+      # returns an array with units
       field :units, type: Array
 
       attr_accessor :unit, :amount
