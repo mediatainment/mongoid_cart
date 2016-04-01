@@ -10,9 +10,8 @@ module MongoidCart
     included do
 
       # adds dynamic association to the CartItem to refer to the ActsAsProduct class
-      MongoidCart::CartItem.class_eval(
-          "belongs_to :product, :class_name => 'Product', inverse_of: :cart_item"
-      )
+      relation_method = MongoidCart::Relation.build_product_relation_string(name)
+      MongoidCart::CartItem.class_eval(relation_method)
 
       # set relations
       has_many :cart_items,
@@ -77,7 +76,7 @@ module MongoidCart
     module ClassMethods
 
       def class_name_to_sym
-        name.to_s.downcase.to_sym
+        name.underscore.to_sym
       end
     end
 

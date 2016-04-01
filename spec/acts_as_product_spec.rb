@@ -46,7 +46,6 @@ describe MongoidCart::ActsAsProduct, type: :model do
                 in_stock: @product.in_stock,
                 unit: @product.unit,
                 amount: @product.amount
-
       }
 
       expect(@product.cart_item_params).to eq result
