@@ -17,7 +17,7 @@ module MongoidCart
       # set relations
       has_many :cart_items,
                class_name: "MongoidCart::CartItem",
-               as: name.to_s.downcase.to_sym,
+               as: class_name_to_sym,
                inverse_of: :product
 
       has_many :mongoid_cart_cart_items, :class_name => 'MongoidCart::CartItem'
@@ -76,6 +76,9 @@ module MongoidCart
 
     module ClassMethods
 
+      def class_name_to_sym
+        name.to_s.downcase.to_sym
+      end
     end
 
   end
