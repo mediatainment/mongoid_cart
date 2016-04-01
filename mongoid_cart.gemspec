@@ -24,4 +24,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'cucumber'
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'mongoid-rspec', '3.0.0'
+  s.add_development_dependency 'simplecov'
 end

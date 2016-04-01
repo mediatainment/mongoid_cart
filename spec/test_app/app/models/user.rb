@@ -4,4 +4,6 @@ class User
   field :password, type: String
 
   has_many :carts, :class_name => 'MongoidCart::Cart', inverse_of: :user
+
+  validates_presence_of :email, :password
 end
