@@ -19,7 +19,12 @@ describe MongoidCart::CartItem do
       is_expected.to belong_to(:cart).of_type(MongoidCart::Cart).as_inverse_of(:cart_items)
     end
 
-    it 'initializes with given Product' do
+
+  end
+
+  describe 'init' do
+
+    specify 'with given Product' do
       product = FactoryGirl.create :product
       cart_item = MongoidCart::CartItem.new(product.cart_item_params)
       cart_item.amount = 1
@@ -27,12 +32,11 @@ describe MongoidCart::CartItem do
       expect(cart_item.save!).to be_truthy
     end
 
-    it 'initializes with given Product' do
-      product = FactoryGirl.create :product
+    specify 'with given AnotherProduct' do
+      product = FactoryGirl.create :another_product
       cart_item = MongoidCart::CartItem.new(product.cart_item_params)
       cart_item.amount = 1
       expect(cart_item.save).to be_truthy
     end
   end
-
 end

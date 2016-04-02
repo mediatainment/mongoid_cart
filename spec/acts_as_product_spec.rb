@@ -26,6 +26,22 @@ describe MongoidCart::ActsAsProduct, type: :model do
 
   end
 
+  describe 'relations' do
+    before(:each) do
+      @product = Product.new
+      @another_product = AnotherProduct.new
+    end
+
+    it 'should have_many :cart_items on product' do
+      expect(@product).to have_many(:cart_items).of_type(MongoidCart::CartItem).as_inverse_of(:product)
+    end
+
+    it 'should have_many :cart_items on another_product' do
+      expect(@another_product).to have_many(:cart_items).of_type(MongoidCart::CartItem).as_inverse_of(:product)
+    end
+
+  end
+
   describe 'fields' do
 
     describe 'type' do

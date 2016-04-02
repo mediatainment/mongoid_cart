@@ -19,8 +19,6 @@ module MongoidCart
                as: class_name_to_sym,
                inverse_of: :product
 
-      has_many :mongoid_cart_cart_items, :class_name => 'MongoidCart::CartItem'
-
       # sku
       field :sku, type: String
 
