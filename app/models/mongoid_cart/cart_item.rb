@@ -11,7 +11,7 @@ module MongoidCart
 
     attr_accessor :units, :in_stock
 
-    belongs_to :mongoid_cart_cart, :class_name => 'MongoidCart::Cart'
+    belongs_to :cart, :class_name => 'MongoidCart::Cart', inverse_of: :cart_items
 
     validates_presence_of :type, :product_title, :sku, :amount, :unit, :net_price
 
