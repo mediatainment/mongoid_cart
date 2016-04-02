@@ -9,6 +9,8 @@ module MongoidCart
     field :net_price, type: Float
     field :unit, type: String
 
+    attr_accessor :units, :in_stock
+
     belongs_to :mongoid_cart_cart, :class_name => 'MongoidCart::Cart'
 
     validates_presence_of :type, :product_title, :sku, :amount, :unit, :net_price
