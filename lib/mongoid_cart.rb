@@ -1,6 +1,7 @@
 require "mongoid_cart/engine"
 require 'mongoid_cart/railtie' if defined?(Rails)
 require "mongoid_cart/acts_as_product"
+require "mongoid_cart/acts_as_customer"
 require 'mongoid_cart/relation'
 
 module MongoidCart
@@ -18,6 +19,7 @@ module MongoidCart
 
     def initialize
       @customer_model_name = 'User'
+
     end
   end
 end

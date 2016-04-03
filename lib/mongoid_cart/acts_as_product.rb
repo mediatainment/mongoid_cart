@@ -10,8 +10,8 @@ module MongoidCart
     included do
 
       # adds dynamic association to the CartItem to refer to the ActsAsProduct class
-      relation_method = MongoidCart::Relation.build_product_relation_string(name)
-      MongoidCart::CartItem.class_eval(relation_method)
+      cart_item_relation_method = MongoidCart::Relation.cart_items_product_string(name)
+      MongoidCart::CartItem.class_eval(cart_item_relation_method)
 
       # set relations
       has_many :cart_items,
