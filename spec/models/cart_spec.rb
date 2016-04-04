@@ -2,6 +2,35 @@ require 'rails_helper'
 
 describe MongoidCart::Cart do
 
+  describe "current_cart" do
+
+    before(:each) do
+      @products = FactoryGirl.create_list(:product, 10)
+      @users = create_list(:user, 2)
+      @user = @users.last
+    end
+
+    it 'carts are initially empty' do
+      expect(@user.carts).to be_empty
+    end
+
+    it 'should return a MongoidCart::Cart' do
+      expect(@user.current_cart).to be_an_instance_of(MongoidCart::Cart)
+    end
+
+    it 'adds new cart to user when called' do
+      @user.current_cart
+
+      expect(@user.carts.size).to be(1)
+    end
+
+    it 'should assign user_id' do
+      @user.current_cart
+
+      expect(@user.carts.last.customer_id).to eql @user._id
+    end
+  end
+
   describe 'relations' do
 
     before(:each) do
