@@ -24,11 +24,26 @@ describe MongoidCart::Cart do
       expect(@user.carts.size).to be(1)
     end
 
-    it 'should assign user_id' do
+    it 'should assign user_id to customer_id' do
       @user.current_cart
 
       expect(@user.carts.last.customer_id).to eql @user._id
     end
+  end
+
+  describe 'persistence' do
+    before(:each) do
+      @user = create(:user)
+      @product = create(:product)
+    end
+
+    it 'should save cart_item when product given' do
+      @user.current_cart.add @product
+
+      expect(@user.current_cart.cart_items).to include
+    end
+
+
   end
 
   describe 'relations' do

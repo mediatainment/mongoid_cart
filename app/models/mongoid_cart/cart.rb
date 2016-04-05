@@ -14,8 +14,11 @@ module MongoidCart
       Product.in(id: cart_items.pluck(:product_id))
     end
 
-    def add(product_object)
-      cart_items.create!(product_object.to_cart_item_params)
+    def add(product_object, amount=nil, unit=nil)
+      cart_item_params = product_object.to_cart_item_params
+      cart_item_params << {amount: amount} if amount
+      cart_item_params << {unit: unit} if unit
+      cart_items.create!(cart_item_params)
     end
 
   end
