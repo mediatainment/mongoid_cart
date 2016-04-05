@@ -19,6 +19,10 @@ module MongoidCart
                as: class_name_to_sym,
                inverse_of: :product
 
+      def carts
+        MongoidCart::Cart.in(id: cart_items.pluck(:cart_id))
+      end
+
       # sku
       field :sku, type: String
 
