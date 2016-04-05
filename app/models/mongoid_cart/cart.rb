@@ -15,9 +15,10 @@ module MongoidCart
     end
 
     def add(product_object, amount=nil, unit=nil)
+      product_object.amount = amount if amount
+      product_object.unit = unit if unit
       cart_item_params = product_object.to_cart_item_params
-      cart_item_params << {amount: amount} if amount
-      cart_item_params << {unit: unit} if unit
+
       cart_items.create!(cart_item_params)
     end
 

@@ -38,8 +38,15 @@ module MongoidCart
       # returns an array with units
       field :units, type: Array
 
-      attr_accessor :unit, :amount
+      attr_accessor :amount, :unit
 
+      def amount
+        @amount || 1
+      end
+
+      def unit
+        @unit || units.first
+      end
       validates_presence_of :product_title, :net_price, :in_stock, :units
 
       before_create :assign_sku

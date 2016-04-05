@@ -37,10 +37,19 @@ describe MongoidCart::Cart do
       @product = create(:product)
     end
 
-    it 'should save cart_item when product given' do
+    it 'should add and save cart_item when product given' do
       @user.current_cart.add @product
 
       expect(@user.current_cart.cart_items).to include
+    end
+
+    it 'should override product amount if passed by add(product,n)' do
+      expected_amount = 1000
+      cart = @user.current_cart
+
+      cart.add(@product, expected_amount)
+
+      expect(User.last.current_cart.cart_items.last.amount).to eq expected_amount
     end
 
 
