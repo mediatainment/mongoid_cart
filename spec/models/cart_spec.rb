@@ -31,6 +31,28 @@ describe MongoidCart::Cart do
     end
   end
 
+  describe 'find_item' do
+
+    before :each do
+      @cart = create :cart
+      @product = create :product, amount: 1
+    end
+
+    specify 'given Hash returns MongoidCart::CartItem' do
+      @cart.cart_items.create!(@product.to_cart_item_params)
+      hash = @product.to_cart_item_params
+
+      expect(@cart.find_item(hash)).to be_an_instance_of MongoidCart::CartItem
+    end
+
+    specify 'given Product returns MongoidCart::CartItem' do
+      @cart.cart_items.create!(@product.to_cart_item_params)
+
+      expect(@cart.find_item(@product)).to be_an_instance_of MongoidCart::CartItem
+    end
+
+  end
+
   describe 'validation' do
 
     before :each do
