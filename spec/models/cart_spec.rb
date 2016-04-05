@@ -32,18 +32,19 @@ describe MongoidCart::Cart do
   end
 
   describe 'persistence' do
+
     before(:each) do
       @user = create(:user)
       @product = create(:product)
     end
 
-    it 'should add and save cart_item when product given' do
+    it 'save cart_item by given product' do
       @user.current_cart.add @product
 
       expect(@user.current_cart.cart_items).to include
     end
 
-    it 'should override product amount if passed by add(product,n)' do
+    it 'overrides amount by add(product,n)' do
       expected_amount = 1000
       cart = @user.current_cart
 
@@ -52,6 +53,14 @@ describe MongoidCart::Cart do
       expect(User.last.current_cart.cart_items.last.amount).to eq expected_amount
     end
 
+    it 'overrides unit if passed by add(product, n, unit)' do
+      expected_unit = @product.units.sample
+      cart = @user.current_cart
+
+      cart.add(@product, @product.amount, expected_unit)
+
+      expect(User.last.current_cart.cart_items.last.unit).to eq expected_unit
+    end
 
   end
 

@@ -47,6 +47,7 @@ module MongoidCart
       def unit
         @unit || units.first
       end
+
       validates_presence_of :product_title, :net_price, :in_stock, :units
 
       before_create :assign_sku
