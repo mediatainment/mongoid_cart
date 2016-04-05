@@ -7,9 +7,8 @@ FactoryGirl.define do
     in_stock (1..100).to_a.sample
     units valid_units
     unit valid_units.sample
-
+    amount (1..10).to_a.sample
     factory :another_product, class: AnotherProduct do
-
     end
   end
 
