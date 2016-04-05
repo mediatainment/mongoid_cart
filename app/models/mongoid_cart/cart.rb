@@ -10,6 +10,8 @@ module MongoidCart
 
     has_many :cart_items, :inverse_of => :cart, :class_name => 'MongoidCart::CartItem'
 
+    validates_with MongoidCart::Validators::CartItemDuplicateValidator
+
     def products
       Product.in(id: cart_items.pluck(:product_id))
     end

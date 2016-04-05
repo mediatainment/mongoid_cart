@@ -31,6 +31,49 @@ describe MongoidCart::Cart do
     end
   end
 
+  describe 'validation' do
+
+    before :each do
+      @cart = create :cart
+      @product = create :product, amount: 1
+    end
+
+    it 'already_in_cart? returns true if product matches' do
+      @cart.add(@product)
+
+      expect(@cart.find_item(@product)).to be_truthy
+    end
+
+    it 'keeps cart_items unique in cart' do
+      @cart.add(@product)
+      @cart.add(@product)
+
+      expect(@cart.cart_items.size).to eql 1
+    end
+
+    it 'does increase automatically by one' do
+      @cart.add(@product)
+      @cart.add(@product)
+
+      expect(@cart.cart_items.first.amount).to eql 2
+    end
+
+    it 'increases existing cart_item by given amount' do
+      @cart.add(@product, 5)
+      @cart.add(@product, 10)
+
+      expect(@cart.cart_items.first.amount).to eql 15
+    end
+
+    it 'allows to add same item in another unit' do
+      @cart.add(@product, 1, @product.units.last)
+      @cart.add(@product, 1, @product.units.first)
+
+      expect(@cart.cart_items.size).to eql 2
+    end
+
+  end
+
   describe 'persistence' do
 
     before(:each) do
