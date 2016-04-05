@@ -15,5 +15,14 @@ module MongoidCart
 
     validates_presence_of :type, :product_title, :sku, :amount, :unit, :net_price
 
+    attr_accessor :amount, :unit
+    def amount
+      @amount || 1
+    end
+
+    def unit
+      @unit || units.first
+    end
+
   end
 end

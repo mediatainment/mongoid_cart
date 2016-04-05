@@ -52,20 +52,22 @@ describe MongoidCart::ActsAsProduct, type: :model do
     end
   end
 
-  describe 'cart_item_params' do
+  describe 'to_cart_item_params' do
 
-    it 'should return Hash with mapped params' do
-      result = {sku: @product.sku,
-                product_title: @product.product_title,
-                type: @product.class.to_s,
-                net_price: @product.net_price,
-                in_stock: @product.in_stock,
-                unit: @product.unit,
-                amount: @product.amount,
-                units: @product.units
+    it 'should return Hash with mapped params to use in cart_items' do
+      result = {
+          product_id: @product.id,
+          sku: @product.sku,
+          product_title: @product.product_title,
+          type: @product.class.to_s,
+          in_stock: @product.in_stock,
+          net_price: @product.net_price,
+          units: @product.units,
+          unit: @product.unit,
+          amount: @product.amount
       }
 
-      expect(@product.cart_item_params).to eq result
+      expect(@product.to_cart_item_params).to eq result
     end
 
   end

@@ -53,13 +53,13 @@ module MongoidCart
 
       # returns Hash with mapped cart_item params
       def to_cart_item_params
-        {product_id: self._id,
+        {product_id: self.id,
          sku: self.sku,
          product_title: self.product_title,
          type: self.type,
+         in_stock: self.in_stock,
          net_price: self.net_price,
          units: self.units,
-         in_stock: self.in_stock,
          unit: self.unit,
          amount: self.amount
         }

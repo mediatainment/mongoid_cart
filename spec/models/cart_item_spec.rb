@@ -26,7 +26,7 @@ describe MongoidCart::CartItem do
 
     specify 'with given Product' do
       product = FactoryGirl.create :product
-      cart_item = MongoidCart::CartItem.new(product.cart_item_params)
+      cart_item = MongoidCart::CartItem.new(product.to_cart_item_params)
       cart_item.amount = 1
 
       expect(cart_item.save!).to be_truthy
@@ -34,7 +34,7 @@ describe MongoidCart::CartItem do
 
     specify 'with given AnotherProduct' do
       product = FactoryGirl.create :another_product
-      cart_item = MongoidCart::CartItem.new(product.cart_item_params)
+      cart_item = MongoidCart::CartItem.new(product.to_cart_item_params)
       cart_item.amount = 1
       expect(cart_item.save).to be_truthy
     end
