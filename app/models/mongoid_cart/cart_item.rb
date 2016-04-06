@@ -15,5 +15,9 @@ module MongoidCart
 
     validates_presence_of :type, :product_title, :sku, :amount, :unit, :net_price
 
+    def related_product
+      self.send(self.type.underscore.to_sym)
+    end
+
   end
 end

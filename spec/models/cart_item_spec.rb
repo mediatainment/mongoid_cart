@@ -3,7 +3,7 @@ require 'rails_helper'
 describe MongoidCart::CartItem do
 
   describe 'relations' do
-    
+
     before(:each) do
       @cart_item = MongoidCart::CartItem.new
     end
@@ -20,6 +20,52 @@ describe MongoidCart::CartItem do
       is_expected.to belong_to(:cart).of_type(MongoidCart::Cart).as_inverse_of(:cart_items)
     end
 
+  end
+
+  describe 'methods' do
+
+    context 'related_product with product' do
+
+      before(:each) do
+        @cart_item = create :cart_item, :with_product
+        @product = create :product
+        @another_product = create :another_product
+      end
+
+      it 'responds with product' do
+        cart = @cart_item.cart
+        cart.add @product
+
+        expect(@cart_item.product).to be_an_instance_of Product
+      end
+
+      it 'related_product responds with Product' do
+        @cart_item.cart.add @product
+
+        expect(@cart_item.related_product).to be_an_instance_of Product
+      end
+    end
+
+    context 'related_product with another_product' do
+
+      before :each do
+        @cart_item = create :cart_item, :with_another_product
+        @another_product = create :another_product
+      end
+
+      it 'related_product responds with AnotherProduct' do
+        @cart_item.cart.add @another_product
+
+        expect(@cart_item.related_product).to be_an_instance_of AnotherProduct
+      end
+
+      it 'responds with another_product' do
+        cart = @cart_item.cart
+        cart.add @another_product
+
+        expect(@cart_item.another_product).to be_an_instance_of AnotherProduct
+      end
+    end
   end
 
   describe 'init' do
