@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mongoid_cart (0.0.2)
+    mongoid_cart (0.5)
       mongoid
       rails (~> 4.0.0)
 

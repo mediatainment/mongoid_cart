@@ -12,6 +12,11 @@ module MongoidCart
 
     validates_with MongoidCart::Validators::CartItemDuplicateValidator
 
+    #
+    def net_sum
+      cart_items.map(&:net_sum).sum
+    end
+
     # given Hash or MongoidCart::ActsAsProduct instance will be added to current_cart
     # @return
     def add(product_object, amount=nil, unit=nil)
@@ -22,10 +27,10 @@ module MongoidCart
       cart_item_params = product_object.to_cart_item_params
       existing_item = find_item(cart_item_params)
 
-      unless existing_item
-        cart_items.create!(cart_item_params)
-      else
+      if existing_item
         existing_item.inc(amount: cart_item_params[:amount])
+      else
+        cart_items.create!(cart_item_params)
       end
     end
 
@@ -54,9 +59,10 @@ module MongoidCart
       return nil if cart_items.blank?
 
       item = prepare_for_cart_item(item)
-      return cart_items.detect do |ci|
+      result = cart_items.detect do |ci|
         ci.type == item.type && ci.unit == item.unit
       end
+      return result.nil? ? false : result
     end
 
     # given Hash or MongoidCart::ActsAsProduct instance will be prepared to store as cart_item

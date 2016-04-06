@@ -2,6 +2,24 @@ require 'rails_helper'
 
 describe MongoidCart::Cart do
 
+
+  describe 'calculations' do
+    before(:each) do
+      @cart = create :cart
+    end
+
+    it 'should sum net_price of all cart items' do
+      product1 = create :product, net_price: 20, unit: "g"
+      product2 = create :product, net_price: 10, unit: "kg"
+
+      @cart.add(product1, 2) # 2 x 20 = 40
+      @cart.add(product2, 2) # 2 x 10 = 20
+
+      expect(@cart.cart_items.size).to eql 2
+      expect(@cart.net_sum).to eql 60.0
+    end
+  end
+
   describe "current_cart" do
 
     before(:each) do
@@ -155,6 +173,25 @@ describe MongoidCart::Cart do
       @user.current_cart.add @another_product
 
       expect(MongoidCart::CartItem.count).to be 1
+    end
+
+    it 'adds both product types' do
+      cart = @user.current_cart
+
+      cart.add @product
+      cart.add @another_product
+
+      expect(cart.cart_items.count).to eql 2
+    end
+
+    it 'adds by -ding' do
+      @product2 = create :product, unit: "test"
+      cart = create :cart
+
+      cart.add @product
+      cart.add @product2
+
+      expect(cart.cart_items.size).to eql 2
     end
 
     it 'overrides amount by add(product,n)' do

@@ -14,8 +14,8 @@ FactoryGirl.define do
       product
     end
     trait :with_another_product do
-      another_product
       type "AnotherProduct"
+      another_product
     end
   end
 end

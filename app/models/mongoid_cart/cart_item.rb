@@ -19,5 +19,9 @@ module MongoidCart
       self.send(self.type.underscore.to_sym)
     end
 
+    def net_sum
+      net_price * amount
+    end
+
   end
 end

@@ -24,6 +24,15 @@ describe MongoidCart::CartItem do
 
   describe 'methods' do
 
+    context 'sum' do
+
+      specify 'amount by net_price with integer' do
+        cart_item = create :cart_item, :with_product,{ net_price: 10.0, amount: 42}
+
+        expect(cart_item.net_sum).to eql 420.0
+      end
+    end
+
     context 'related_product with product' do
 
       before(:each) do
