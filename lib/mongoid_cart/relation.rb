@@ -11,7 +11,7 @@ module MongoidCart
     end
 
     def self.cart_product_string(class_name)
-      "def #{class_name.pluralize}; #{class_name.constantize}.in(id: cart_items.pluck(:#{class_name.to_s.underscore.to_sym}_id)); end"
+      "def #{class_name.to_s.underscore.pluralize}; #{class_name.camelcase.constantize}.in(id: cart_items.pluck(:#{class_name.to_s.underscore}_id)); end"
     end
 
   end

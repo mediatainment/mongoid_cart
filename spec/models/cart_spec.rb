@@ -101,12 +101,19 @@ describe MongoidCart::Cart do
     before(:each) do
       @user = create(:user)
       @product = create(:product)
+      @another_product = create(:another_product)
     end
 
     it 'save cart_item by given product' do
       @user.current_cart.add @product
 
-      expect(@user.current_cart.cart_items).to include
+      expect(MongoidCart::CartItem.count).to be 1
+    end
+
+    it 'save cart_item by given another_product' do
+      @user.current_cart.add @another_product
+
+      expect(MongoidCart::CartItem.count).to be 1
     end
 
     it 'overrides amount by add(product,n)' do
@@ -133,6 +140,8 @@ describe MongoidCart::Cart do
 
     before(:each) do
       @product = create(:product)
+      @another_product = create(:another_product)
+      @cart = create(:cart)
       @user = create(:user)
     end
 
@@ -143,5 +152,28 @@ describe MongoidCart::Cart do
     it 'has_many cart_items' do
       is_expected.to have_many(:cart_items).of_type(MongoidCart::CartItem).as_inverse_of(:cart)
     end
+
+    it 'returns all products' do
+      @user.current_cart.add(@product)
+
+      expect(@user.current_cart.products).to include @product
+    end
+
+    it 'returns all another_products' do
+      @user.current_cart.add(@another_product)
+
+      expect(@user.current_cart.another_products).to include @another_product
+    end
+
+    it 'should return both product models independently' do
+      @user.current_cart.add(@another_product)
+      @user.current_cart.add(@product)
+
+      cart = @user.current_cart
+      expect(cart.cart_items.size).to be 2
+      expect(cart.products.count).to be 1
+      expect(cart.another_products.count).to be 1
+    end
+
   end
 end

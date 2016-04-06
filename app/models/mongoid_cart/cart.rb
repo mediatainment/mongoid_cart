@@ -12,10 +12,6 @@ module MongoidCart
 
     validates_with MongoidCart::Validators::CartItemDuplicateValidator
 
-    def products
-      Product.in(id: cart_items.pluck(:product_id))
-    end
-
     # given Hash or MongoidCart::ActsAsProduct instance will be added to current_cart
     # @return
     def add(product_object, amount=nil, unit=nil)
@@ -46,11 +42,13 @@ module MongoidCart
     # given Hash or MongoidCart::ActsAsProduct instance will be prepared to store as cart_item
     # @return MongoidCart::ActsAsProduct instance
     def prepare_for_cart_item(item)
-      is_a_hash = item.class == Hash
+      is_a_hash = item.is_a? Hash
       if is_a_hash
         prepared_item = MongoidCart::CartItem.new item
+
       elsif item.singleton_class.included_modules.include?(MongoidCart::ActsAsProduct)
         prepared_item = item
+
       else
         raise StandardError, "Given object must be a Hash or include MongoidCart::ActsAsProduct: #{item.class}"
       end

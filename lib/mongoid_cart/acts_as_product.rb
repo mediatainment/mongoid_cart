@@ -13,6 +13,9 @@ module MongoidCart
       cart_item_relation_method = MongoidCart::Relation.cart_items_product_string(name)
       MongoidCart::CartItem.class_eval(cart_item_relation_method)
 
+      product_relation_method = MongoidCart::Relation.cart_product_string(name)
+      MongoidCart::Cart.class_eval(product_relation_method)
+
       # set relations
       has_many :cart_items,
                class_name: "MongoidCart::CartItem",
@@ -61,8 +64,7 @@ module MongoidCart
 
       # returns Hash with mapped cart_item params
       def to_cart_item_params
-        {product_id: self.id,
-         sku: self.sku,
+        {sku: self.sku,
          product_title: self.product_title,
          type: self.type,
          in_stock: self.in_stock,
@@ -70,7 +72,7 @@ module MongoidCart
          units: self.units,
          unit: self.unit,
          amount: self.amount
-        }
+        }.merge!(Hash["#{self.class.to_s.underscore}_id".to_sym, self.id])
       end
 
       # returns class of product as String
