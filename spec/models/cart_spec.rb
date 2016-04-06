@@ -53,6 +53,47 @@ describe MongoidCart::Cart do
 
   end
 
+  describe 'add products' do
+    before :each do
+      @cart = create :cart
+      @product = create :product, amount: 1
+    end
+
+    it 'should add an cart_item' do
+      expect(MongoidCart::CartItem.all.count).to be 0
+      @cart.add @product
+      expect(MongoidCart::CartItem.all.count).to be 1
+    end
+
+  end
+
+  describe 'remove products' do
+
+    before :each do
+      @cart = create :cart
+      @product = create :product, amount: 1
+    end
+
+    it 'should remove an cart_item' do
+      @cart.add @product
+      @cart.remove @product
+      expect(MongoidCart::CartItem.count).to be 0
+    end
+
+    it 'should increase from cart_item' do
+      @cart.add @product, 3
+      @cart.remove @product, 1
+      expect(MongoidCart::CartItem.last.amount).to be 2
+    end
+
+    it 'should remove from cart if lower than 0' do
+      @cart.add @product, 3
+      @cart.remove @product, 5
+      expect(MongoidCart::CartItem.count).to be 0
+    end
+
+  end
+
   describe 'validation' do
 
     before :each do
@@ -132,6 +173,13 @@ describe MongoidCart::Cart do
       cart.add(@product, @product.amount, expected_unit)
 
       expect(User.last.current_cart.cart_items.last.unit).to eq expected_unit
+    end
+
+    it 'decreases value if negative given' do
+      @user.current_cart.add @product, 10
+      @user.current_cart.add @product, -2
+
+      expect(@user.current_cart.cart_items.last.amount).to eql 8
     end
 
   end

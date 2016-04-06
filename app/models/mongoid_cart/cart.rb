@@ -18,14 +18,34 @@ module MongoidCart
       product_object = (product_object)
       product_object.amount = amount if amount
       product_object.unit = unit if unit
-      cart_item_params = product_object.to_cart_item_params
 
+      cart_item_params = product_object.to_cart_item_params
       existing_item = find_item(cart_item_params)
 
       unless existing_item
         cart_items.create!(cart_item_params)
       else
         existing_item.inc(amount: cart_item_params[:amount])
+      end
+    end
+
+    def remove(product_object, amount=nil, unit=nil)
+      product_object = (product_object)
+      product_object.amount = amount if amount
+      product_object.unit = unit if unit
+
+      cart_item_params = product_object.to_cart_item_params
+      existing_item = find_item(cart_item_params)
+
+      if existing_item && amount
+        negative_amount = -amount
+        if ((existing_item.amount + negative_amount) <= 0)
+          existing_item.destroy
+        else
+          existing_item.inc(amount: negative_amount)
+        end
+      elsif existing_item && amount.nil?
+        existing_item.destroy
       end
     end
 
