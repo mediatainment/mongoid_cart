@@ -13,5 +13,5 @@ gemspec
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
 
-gem 'mongoid'
-gem 'cucumber-rails', :require => false, group: [:development, :test]
+gem 'mongoid', '>= 6.0.0'
+gem 'cucumber-rails', '>= 1.4.3', :require => false, group: [:development, :test]
