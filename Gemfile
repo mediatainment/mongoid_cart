@@ -14,4 +14,4 @@ gemspec
 # gem 'byebug', group: [:development, :test]
 
 gem 'mongoid'
-gem 'cucumber-rails', '>= 2.1.0', :require => false, group: [:development, :test]
+gem 'cucumber-rails', '>= 1.4.3', :require => false, group: [:development, :test]
